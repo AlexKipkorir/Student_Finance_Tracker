@@ -1,0 +1,55 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
+    id "dev.flutter.flutter-gradle-plugin"
+    id 'com.google.gms.google-services' // Google services plugin
+}
+
+android {
+    namespace = "com.example.untitled1"
+    compileSdk = 35
+    ndkVersion = flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        applicationId = "com.example.untitled1"
+        minSdk = 23 // Updated to at least 23 to match firebase_auth requirements
+        targetSdk = flutter.targetSdkVersion
+        versionCode = 1
+        versionName = 1.0
+    }
+
+    buildTypes {
+        release {
+            signingConfig = signingConfigs.debug
+        }
+    }
+}
+
+flutter {
+    source = "../.."
+}
+
+dependencies {
+    // Firebase BoM (Bill of Materials)
+    implementation platform('com.google.firebase:firebase-bom:33.6.0')
+
+    // Firebase dependencies
+    implementation 'com.google.firebase:firebase-auth' // Enable Firebase Authentication
+
+    // Other dependencies
+    implementation 'androidx.core:core-ktx:1.15.0'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.9.22'
+}
+
+
+
